@@ -1,0 +1,11 @@
+{
+  "server": {
+    "baseDir": "jit",
+    "routes": {
+      "/node_modules": "node_modules"
+    },
+    "middleware": {
+      "0": null
+    }
+  }
+}
