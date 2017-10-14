@@ -49,7 +49,7 @@
     "@angular/upgrade": "~4.3.1",
     "angular-in-memory-web-api": "~0.4.0",
     "core-js": "^2.4.1",
-    "mx-components": "file:///C:\\PROJETOS\\NODEJS\\examples\\mx-components\\dist\\mx-components-0.0.0.tgz",
+    "mx-components": "file:///C:\\PROJETOS\\NODEJS\\examples\\versioned\\angular4\\mx-components\\dist\\mx-components-0.0.0.tgz",
     "rxjs": "^5.1.0",
     "systemjs": "0.19.39",
     "zone.js": "^0.8.4"
