@@ -1,0 +1,22 @@
+<ul class="ul-item">
+
+  <li class='active {{classHasChildren(item)}}' *ngFor="let item of itens">
+
+    <ng-container *ngIf="hasChildren(item)">
+      <a href='#' mxAccordionClick>
+        <span>{{item.label}} </span>
+        <span class="holder"></span>
+      </a>
+      
+      <mx-accordion-item [itens]="item.children">
+      </mx-accordion-item>
+
+    </ng-container>
+
+    <ng-container *ngIf="!hasChildren(item)">
+      <a href='{{item.url}}'>
+        <span>{{item.label}} </span>
+      </a>
+    </ng-container>
+  </li>
+</ul>
