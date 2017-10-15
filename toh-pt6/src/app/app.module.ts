@@ -16,6 +16,8 @@ import { HeroDetailComponent } from './hero-detail.component';
 import { HeroService } from './hero.service';
 import { HeroSearchComponent } from './hero-search.component';
 
+import { HeaderModule, ClockPickerModule } from 'mx-components';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -23,6 +25,7 @@ import { HeroSearchComponent } from './hero-search.component';
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule,
+    HeaderModule, ClockPickerModule
 
     
   ],

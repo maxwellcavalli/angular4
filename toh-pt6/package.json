@@ -49,6 +49,7 @@
     "@angular/upgrade": "~4.3.1",
     "angular-in-memory-web-api": "~0.4.0",
     "core-js": "^2.4.1",
+    "mx-components": "file:///C:\\PROJETOS\\NODEJS\\examples\\versioned\\angular4\\mx-components\\dist\\mx-components-0.0.3.tgz",
     "rxjs": "^5.1.0",
     "systemjs": "0.19.39",
     "zone.js": "^0.8.4"
@@ -63,6 +64,7 @@
     "@types/angular-route": "^1.3.2",
     "@types/angular-sanitize": "^1.3.3",
     "@types/jasmine": "2.5.36",
+    "@types/jquery": "^3.2.13",
     "@types/node": "^6.0.45",
     "babel-cli": "^6.16.0",
     "babel-preset-angular2": "^0.0.2",

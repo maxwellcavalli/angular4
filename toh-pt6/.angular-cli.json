@@ -19,10 +19,12 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/mx-components/src/assets/style/jquery-clockpicker.min.css"
       ],
       "scripts": [
-        
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/mx-components/src/assets/script/jquery-clockpicker.min.js"        
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

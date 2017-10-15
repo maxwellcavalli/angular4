@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { HeaderModule } from './modules/header/header.module';
-import { AccordionModule } from './modules/accordion/accordion.module';
+
+import { ClockPickerModule, HeaderModule, AccordionModule } from '../../public_api';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,8 @@ import { AccordionModule } from './modules/accordion/accordion.module';
   imports: [
     BrowserModule,
     HeaderModule,
-    AccordionModule
+    AccordionModule,
+    ClockPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
