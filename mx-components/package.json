@@ -1,6 +1,6 @@
 {
   "name": "mx-components",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -9,10 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    
     "packagr": "ng-packagr -p ng-package.json"
   },
-  "private": true,
+  
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
