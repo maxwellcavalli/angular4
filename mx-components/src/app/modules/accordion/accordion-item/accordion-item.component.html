@@ -3,7 +3,8 @@
   <li class='active {{classHasChildren(item)}}' *ngFor="let item of itens">
 
     <ng-container *ngIf="hasChildren(item)">
-      <a href='#' mxAccordionClick>
+      <a href='javascript:void(0)' mxAccordionClick class="parent-link">
+        <mat-icon *ngIf="item.icon" class="icon-padding">{{item.icon}}</mat-icon>
         <span>{{item.label}} </span>
         <span class="holder"></span>
       </a>
@@ -14,8 +15,10 @@
     </ng-container>
 
     <ng-container *ngIf="!hasChildren(item)">
-      <a href='{{item.url}}'>
+      <a routerLink="{{item.url}}" routerLinkActive="active-link" class="parent-link">
+        <mat-icon *ngIf="item.icon" class="icon-padding">{{item.icon}}</mat-icon>
         <span>{{item.label}} </span>
+        <span *ngIf="item.badge" class="badge">{{item.badge}} </span>
       </a>
     </ng-container>
   </li>

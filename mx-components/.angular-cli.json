@@ -20,7 +20,8 @@
       "prefix": "mx",
       "styles": [
         "styles.css",
-        "assets/style/jquery-clockpicker.min.css"
+        "assets/style/jquery-clockpicker.min.css",
+        "assets/application.scss"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

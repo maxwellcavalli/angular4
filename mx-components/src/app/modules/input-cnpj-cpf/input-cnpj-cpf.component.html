@@ -1,0 +1,9 @@
+<input matInput
+  type="text" 
+  [placeholder]="placeholder"  
+  [(ngModel)]="value"  
+  (blur)="maskCpfCnpj($event)"
+  (focus)="removeMask($event)"
+  class="input"
+  [formControl]="formControl"
+>

@@ -1,0 +1,10 @@
+<input type="file" class="hide" (change)="getImagem($event)" multiple #upload accept="{{filterTypes}}">
+
+<span (click)="openFileUpload(index)" style="cursor:pointer" *ngIf="tipo == 'icon'">
+  <i class="material-icons">file_upload</i>
+</span>
+
+<button mat-raised-button type="button" (click)="openFileUpload(index)" *ngIf="tipo == 'button'">
+  <mat-icon>file_upload</mat-icon>
+  <span style="padding-left: 5px">{{labelButton}}</span>
+</button>

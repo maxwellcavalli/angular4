@@ -1,40 +1,36 @@
-import { Directive, OnInit, Self, Renderer, ElementRef, Renderer2, NgZone } from '@angular/core';
-import { DefaultValueAccessor, NgControl } from '@angular/forms';
+import { Directive, OnInit, Self, Renderer, ElementRef, Renderer2, NgZone, Optional, ChangeDetectorRef, ApplicationRef, HostListener } from '@angular/core';
+import { DefaultValueAccessor, NgControl, NgModel } from '@angular/forms';
 
 declare var jquery: any;
 declare var $: any;
 
-
-
-interface JQuery<HTMLElement> {
-  teste(): void;
-}
-
-
 @Directive({
   selector: '[mxClockPicker]'
 })
-export class ClockPickerDirective extends DefaultValueAccessor {
-
+export class MxClockPickerDirective {
 
   el: ElementRef;
 
   constructor(_renderer: Renderer2,
     _elementRef: ElementRef,
-    private zone: NgZone) {
-
-    super(_renderer, _elementRef, true);
+    private zone: NgZone,
+    private control: NgControl,
+    private _cdr: ApplicationRef) {
 
     this.el = _elementRef;
+    this.el.nativeElement.onblur = function () {
+
+      let _v = this.value;
+      _v = (_v as String).replace(new RegExp('\\/', 'g'), '');
+
+      if (_v === '') {
+        control.control.setValue('');
+      }
+    };
   }
 
-  // constructor(@Self() model: NgControl, private elRef: ElementRef, renderer: Renderer) {
-  //   super(model, renderer, elRef);
-  // }
-
   public ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
-    console.log(this.el.nativeElement);
+    this.el.nativeElement.value = this.control.value;
 
     this.zone.runOutsideAngular(() => {
       $(this.el.nativeElement).clockpicker({
@@ -42,13 +38,10 @@ export class ClockPickerDirective extends DefaultValueAccessor {
         align: 'left',
         donetext: 'Done',
         afterDone: () => {
-          console.log("after done");
-          this.onChange(this.el.nativeElement.value);
+          this.control.control.setValue(this.el.nativeElement.value);
+          this._cdr.tick();
         }
       });
-
     });
-
   }
-
 }

@@ -14,6 +14,11 @@ if (!fs.existsSync('dist/src/assets/script'))
 if (!fs.existsSync('dist/src/assets/style'))
   fs.mkdir('dist/src/assets/style');
 
+if (!fs.existsSync('dist/locale')){
+  fs.mkdir('dist/locale');
+  
+  fs.createReadStream('src/locale/en.js').pipe(fs.createWriteStream('dist/locale/en.js'));
+}
 
 resources.map(function (f) {
   var path = f.split('/');

@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title class="default-header">
+    <div style="font-weight: bold"> {{title}} </div>
+  </mat-card-title>
+
+  <mat-card-content>
+    <ng-content></ng-content>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button type="button" routerLink="{{backButtonUrl}}" *ngIf="showBackButton" class="reset-button">
+      <mat-icon>keyboard_return</mat-icon>
+      <span style="padding-left: 5px">{{backButtonLabel}}</span>
+    </button>
+
+    <button mat-raised-button type="submit" [disabled]="!form.valid" *ngIf="showSaveButton" class="submit-button">
+      <mat-icon>save</mat-icon>
+      <span style="padding-left: 5px">{{submitButtonLabel}}</span>
+    </button>
+  </mat-card-actions>
+
+</mat-card>

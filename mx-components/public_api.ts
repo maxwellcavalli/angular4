@@ -1,3 +1,18 @@
 export * from './src/app/modules/header/header.module'
 export * from './src/app/modules/accordion/accordion.module'
 export * from './src/app/modules/clock-picker/clock-picker.module'
+export * from './src/app/modules/card/card.module'
+export * from './src/app/modules/crud-box/crud-box.module'
+export * from './src/app/modules/date/date.module'
+export * from './src/app/modules/dialog/dialog.module'
+export * from './src/app/modules/input-cnpj-cpf/input-cnpj-cpf.module'
+export * from './src/app/modules/input-telefone/input-telefone.module'
+
+export * from './src/app/modules/upload/upload.module'
+export * from './src/app/modules/gallery/gallery.module'
+export * from './src/app/modules/data-table/data-table.module'
+export * from './src/app/modules/search-box/search-box.module'
+export * from './src/app/modules/shared/shared.module'
+
+export * from './src/app/modules/dialog'
+export * from './src/app/modules/data-table'

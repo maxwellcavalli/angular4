@@ -1,5 +1,161 @@
-<mx-header>Such Header</mx-header>
+<div style="display: flex; flex-direction: column" >
+    <div>
+        <div style="flex: 1">
+            <div class="header">
+                HEADER
+            </div>
+        </div>
+    </div>
 
-<mx-clock-picker></mx-clock-picker>
+    <div style="display: flex; flex-direction: row">
 
-<mx-accordion [itens]="menu"></mx-accordion>
+        <div>
+            <mx-accordion [itens]="menu"></mx-accordion>
+        </div>
+
+        <div style="flex: 1; margin-right: 10px">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+
+                <mx-card title="HEADER COMPONENT">
+                    <mx-header>Such Header</mx-header>
+                </mx-card>
+
+                <mx-card title="CARD COMPONENT">
+                    <span>
+                        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque
+                        ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo
+                        enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni
+                        dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia
+                        dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore
+                        et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem
+                        ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
+                        iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui
+                        dolorem eum fugiat quo voluptas nulla pariatur?"
+                    </span>
+
+                </mx-card>
+
+                <mx-card title="FORM COMPONENT">
+                    <div style="padding-bottom: 5px">
+                        <button mat-raised-button type="button" (click)="disable()">ENABLE/DISABLE </button>
+                    </div>
+
+                    <div>
+                        <mx-date placeholder="Date" [(ngModel)]="myObject.data" [formControl]="form.controls['data']"></mx-date>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mx-clock-picker placeholder="Time" [(ngModel)]="myObject.hora" [formControl]="form.controls['hora']"></mx-clock-picker>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mx-input-cnpj-cpf placeholder="CNPJ/CPF" [(ngModel)]="myObject.cpf" [formControl]="form.controls['cpf']">
+                            </mx-input-cnpj-cpf>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-form-field>
+                            <mx-input-telefone placeholder="Telefone" [(ngModel)]="myObject.telefone" [formControl]="form.controls['telefone']"></mx-input-telefone>
+                        </mat-form-field>
+                    </div>
+                </mx-card>
+
+                <mx-card title="UPLOAD COMPONENT">
+                    <div>
+                        Icon
+                        <mx-upload (onFinishUpload)="onFinishUpload($event)"></mx-upload>
+                    </div>
+
+                    <div>
+                        Button
+                        <mx-upload tipo="button" (onFinishUpload)="onFinishUpload($event)"></mx-upload>
+                    </div>
+                </mx-card>
+
+                <mx-card title="GALLERY COMPONENT">
+                    <mx-upload tipo="button" (onFinishUpload)="onFinishUploadGallery($event)"></mx-upload>
+                    <button mat-raised-button type="button" (click)="clearGallery()">CLEAR</button>
+
+                    <mx-gallery [images]="images">
+                    </mx-gallery>
+                </mx-card>
+
+                <mx-card title="DATATABLE COMPONENT">
+                    <mx-data-table 
+                        [rows]="rows | async" 
+                        [cols]="cols" 
+                        [page]="page" 
+                        (onPage)="onPage($event)">
+                    </mx-data-table>
+
+                    <button type="button" (click)="addRow()"></button>
+
+                </mx-card>
+
+                <mx-card title="TREEVIEW COMPONENT">
+                    <!-- <mx-treeview-checkbox [nodes]="myNodes">
+                    </mx-treeview-checkbox> -->
+                </mx-card>
+
+
+                <mx-card title="DIALOG COMPONENT">
+                    <button type="button" mat-raised-button (click)="openDialog()">OPEN</button>
+                </mx-card>
+
+                <mx-crud-box title="CRUD BOX COMPONENT" [form]="form">
+                    <div style="display: flex">
+                        <div style="display: flex; flex: 1">
+                            <div style="max-width: 100px; margin-right: 10px">
+                                <mat-form-field>
+                                    <input matInput type="text" [(ngModel)]="myObject.code" [formControl]="form.controls['code']" placeholder="Code">
+                                </mat-form-field>
+                            </div>
+                            <div style="flex:1">
+                                <mat-form-field class="min-width-100">
+                                    <input matInput type="text" [(ngModel)]="myObject.name" [formControl]="form.controls['name']" placeholder="Name">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </mx-crud-box>
+
+                <mx-search-box 
+                    header="SEARCH BOX">
+                    <mat-form-field class="min-width-100">
+                        <input matInput type="text" [(ngModel)]="myFilter.name" placeholder="Filter" [ngModelOptions]="{standalone:true}">
+                    </mat-form-field>
+                </mx-search-box>
+
+            </form> 
+        </div>
+    </div>
+</div>
+
+<mx-dialog #dialog title="TESTE DIALOG" [width]="600" [height]="400">
+    <div *mx-dialog-content>
+        <input matInput type="text" [(ngModel)]="myFilter.name" placeholder="Filter" [ngModelOptions]="{standalone:true}">
+
+        <div style="text-align: justify">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
+            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
+            ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+            adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
+            ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+        </div>
+    </div>
+
+    <div *mx-dialog-action>
+        <button mat-raised-button (click)="dialog.closeDialog()">Close</button>
+    </div>
+
+</mx-dialog>
+  
+<ng-template #cellCheckboxButton let-value="value" let-row="row">
+    <input type="checkbox" (click)="selection(row, $event, $event.target.checked)"  [checked]="getData(row)">
+</ng-template>

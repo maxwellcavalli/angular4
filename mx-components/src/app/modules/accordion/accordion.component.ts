@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AccordtionItem } from './accordion-item/accordion-item.component';
-
-
+import { MxAccordtionItem } from './accordion-item/accordion-item.component';
 
 
 @Component({
@@ -9,9 +7,9 @@ import { AccordtionItem } from './accordion-item/accordion-item.component';
   templateUrl: './accordion.component.html',
   styleUrls: ['./accordion.component.css']
 })
-export class AccordionComponent implements OnInit {
+export class MxAccordionComponent implements OnInit {
 
-  @Input() itens: AccordtionItem[];
+  @Input() itens: MxAccordtionItem[];
 
   constructor() { }
 

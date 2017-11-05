@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-export interface AccordtionItem {
+export interface MxAccordtionItem {
   label: '',
   url: ''
   children: any,
@@ -11,20 +11,20 @@ export interface AccordtionItem {
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.css']
 })
-export class AccordionItemComponent implements OnInit {
+export class MxAccordionItemComponent implements OnInit {
 
-  @Input() itens: AccordtionItem[];
+  @Input() itens: MxAccordtionItem[];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  public hasChildren(item: AccordtionItem) {
+  public hasChildren(item: MxAccordtionItem) {
     return item.children && item.children.length > 0 ? true : false;
   }
 
-  public classHasChildren(item: AccordtionItem){
+  public classHasChildren(item: MxAccordtionItem){
     return this.hasChildren(item) ? 'has-children' : '';
   } 
 

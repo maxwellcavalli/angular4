@@ -1,0 +1,136 @@
+/*gallery*/
+.gallery-button-enable{
+    color: black;
+    cursor: pointer;
+}
+
+.gallery-button-disable{
+    color: silver;
+    cursor: not-allowed;
+}
+
+.disableSelection{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    outline: 0;
+}
+
+.gallery-image-container {
+    display: flex; 
+    flex-direction: column; 
+    width: 400px; 
+    height: 400px; 
+}
+
+.gallery-image-large {
+    display: flex; 
+    width: 100%;     
+    height: 330px; 
+    justify-content: center; 
+    align-items: center; 
+    background: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.gallery-image-limits{
+    max-height: 300px; 
+    max-width: 300px;
+}
+
+.gallery-thumbmail-container {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center;
+}
+
+.gallery-thumbmail-prior {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.gallery-thumbmail-next {
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.gallery-thumbmail-button-size {
+    font-size: 50px;
+}
+
+.gallery-thumbmail-image-padding {
+    padding: 5px;
+}
+
+.gallery-thumbmail-image-size {
+    width: 50px; 
+    height: 50px; 
+    //border: 1px solid transparent;
+    border-radius: 10px;
+    opacity: 0.5;
+}
+
+.gallery-thumbmail-image-size:hover {
+    //border: 1px solid #777;
+    opacity: 1;
+}
+
+/*end gallery*/
+
+.cursor-hand {
+	cursor: pointer;
+}
+
+@media screen and (max-width: 425px) {
+    .gallery-image-container {
+        width: 370px;
+        height: 350px;
+    }
+
+    .gallery-image-large {
+        height: 300px;
+    }
+
+    .gallery-thumbmail-image-padding {
+        padding: 1px;
+    }
+
+    .gallery-image-limits{
+        max-height: 250px; 
+        max-width: 250px;
+    }
+}
+
+
+@media screen and (max-width: 375px) {
+    .gallery-image-container {
+        width: 332px;
+        height: 300px;
+    }
+
+    .gallery-image-large {
+        height: 250px;
+    }
+
+    .gallery-image-limits{
+        max-height: 200px; 
+        max-width: 200px;
+    }
+
+    .gallery-thumbmail-image-padding {
+        padding: 1px;
+    }
+
+    .gallery-thumbmail-image-size {
+        width: 40px;
+        height: 40px;
+    }
+
+
+
+}

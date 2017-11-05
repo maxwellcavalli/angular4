@@ -3,7 +3,7 @@ import { Directive, ElementRef, HostListener } from '@angular/core';
 @Directive({
   selector: '[mxAccordionClick]'
 })
-export class AccordionClickDirective {
+export class MxAccordionClickDirective {
 
   constructor(private el: ElementRef) {
   }

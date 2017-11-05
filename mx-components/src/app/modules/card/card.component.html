@@ -1,0 +1,15 @@
+<mat-card [ngClass]="style">
+	<mat-card-title #header>
+		<ng-container *ngIf="hasTitleTmpl"> 
+    		<ng-container *ngTemplateOutlet="titleTpl"></ng-container>
+		</ng-container> 
+		
+		<ng-container *ngIf="!hasTitleTmpl">
+			<div style="font-weight: bold"> {{title}}</div>
+		</ng-container>
+	</mat-card-title>
+	
+	<mat-card-content>
+		<ng-content></ng-content>
+	</mat-card-content>
+</mat-card>

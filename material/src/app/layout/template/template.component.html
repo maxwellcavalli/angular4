@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="header">
+
+		<div>
+			<button mat-button type="button" (click)="sidenav.toggle()" style="min-width: 55px">
+				<mat-icon>menu</mat-icon>
+			</button>
+		</div>
+
+		<div class="logo">
+			LOGO
+
+		</div>
+
+		<div class="actions-header">
+			RIGHT ACTIONS
+
+		</div>
+	</div>
+
+	<div class="content">
+		<mat-sidenav-container class="sidenav-container">
+			<mat-sidenav #sidenav class="sidenav-menu" [mode]="isOver() ? 'over' : 'side'" [opened]="!isOver()">
+
+				<mx-accordion [itens]="menu"></mx-accordion>
+
+			</mat-sidenav>
+
+			<div class="sidenav-content">
+				<router-outlet></router-outlet>
+			</div>
+
+		</mat-sidenav-container>
+	</div>
+
+	<div class="footer">
+		Copyright Kothar@2017
+	</div>
+
+</div>

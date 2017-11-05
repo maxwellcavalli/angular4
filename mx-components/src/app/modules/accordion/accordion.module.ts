@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccordionComponent } from './accordion.component';
-import { AccordionClickDirective } from '../../directives/accordion-click.directive';
-import { AccordionItemComponent } from './accordion-item/accordion-item.component';
+import { RouterModule, Routes } from '@angular/router';
+import { MatIconModule } from '@angular/material';
+
+import { MxAccordionComponent } from './accordion.component';
+import { MxAccordionClickDirective } from '../../directives/accordion-click.directive';
+import { MxAccordionItemComponent } from './accordion-item/accordion-item.component';
+
+
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    MatIconModule,
+    RouterModule
   ],
-  declarations: [AccordionComponent, AccordionClickDirective, AccordionItemComponent],
-  exports: [AccordionComponent, AccordionClickDirective]
+  declarations: [MxAccordionComponent, MxAccordionClickDirective, MxAccordionItemComponent],
+  exports: [MxAccordionComponent, MxAccordionClickDirective]
 })
-export class AccordionModule { }
+export class MxAccordionModule { }

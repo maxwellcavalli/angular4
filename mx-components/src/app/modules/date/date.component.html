@@ -1,0 +1,20 @@
+<mat-form-field>
+    <input matInput 
+        [matDatepicker]="picker" 
+        placeholder="{{placeholder}}" 
+        [ngModel]="value" 
+        (ngModelChange)="changeValue($event)"
+        [formControl]="formControl"
+        class="input-date"
+        readonly>
+
+    <mat-datepicker-toggle matSuffix [for]="picker" *ngIf="!formControl.disabled" ></mat-datepicker-toggle>
+    <span class="mat-datepicker-toggle" matSuffix *ngIf="!formControl.disabled">
+        <button class="mat-icon-button" mat-icon-button="" type="button" aria-label="Open calendar" (click)="clear()">
+            <span class="mat-button-wrapper">
+                <mat-icon>clear</mat-icon>
+            </span>
+        </button>
+    </span>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>

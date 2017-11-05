@@ -1,0 +1,25 @@
+<div class="gallery-image-container">
+
+  <div class="gallery-image-large">
+    <img class="cursor-hand gallery-image-limits" src="data:image/png;base64,{{galleryImageContent?.content}}" *ngIf="showImagePreview && galleryImageContent"
+    />
+  </div>
+
+  <div class="gallery-thumbmail-container">
+
+    <div (click)="priorImage()" class="disableSelection gallery-thumbmail-prior" *ngIf="showButtons">
+      <i class="material-icons {{showPrior ? 'gallery-button-enable' : 'gallery-button-disable' }} gallery-thumbmail-button-size">chevron_left</i>
+    </div>
+
+    <div *ngFor="let item of images; let i=index">
+      <div class="gallery-thumbmail-image-padding" *ngIf="item.display_on_gallery">
+        <img src="data:image/png;base64,{{item.content}}" (click)="changeImage(item)" class="cursor-hand gallery-thumbmail-image-size"
+        />
+      </div>
+    </div>
+
+    <div (click)="nextImage()" class="disableSelection gallery-thumbmail-next" *ngIf="showButtons">
+      <i class="material-icons {{showNext ? 'gallery-button-enable' : 'gallery-button-disable' }} gallery-thumbmail-button-size">chevron_right</i>
+    </div>
+  </div>
+</div>

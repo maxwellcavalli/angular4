@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from './header.component';
+import { MxHeaderComponent } from './header.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [HeaderComponent],
-  exports: [HeaderComponent]
+  declarations: [MxHeaderComponent],
+  exports: [MxHeaderComponent]
 })
-export class HeaderModule { }
+export class MxHeaderModule { }

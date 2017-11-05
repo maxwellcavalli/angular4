@@ -1,0 +1,65 @@
+<div [ngClass]="containerStyleClass">
+
+  <div matSort (matSortChange)="sortData($event)">
+
+    <div class="table-header">
+      <ng-container *ngFor="let col of cols">
+
+        <div class="header-cell" [ngStyle]="getStyle(col) " [mat-sort-header]="col.prop" *ngIf="col.sortable && col.hideOnMobile"
+          fxHide fxShow.gt-xs>
+          {{col.title}}
+        </div>
+
+        <div class="header-cell" [ngStyle]="getStyle(col) " [mat-sort-header]="col.prop" *ngIf="col.sortable && !col.hideOnMobile">
+          {{col.title}}
+        </div>
+
+        <div class="header-cell" [ngStyle]="getStyle(col) " *ngIf="!col.sortable && col.hideOnMobile" fxHide fxShow.gt-xs>
+          {{col.title}}
+        </div>
+
+        <div class="header-cell" [ngStyle]="getStyle(col) " *ngIf="!col.sortable && !col.hideOnMobile">
+          {{col.title}}
+        </div>
+      </ng-container>
+    </div>
+
+    <div *ngIf="!hasRows" class="empty-table"> {{emptyMessage}}</div>
+
+    <div class="tab-content" style="display: flex;  width: 100%;">
+      <mx-data-table-wraper class="table-wraper" [rows]="rows" [cols]="cols" [showRipple]="showRipple">
+      </mx-data-table-wraper>
+    </div>
+    
+    <mat-paginator #paginator 
+      [length]="page.recordCount" 
+      [pageIndex]="page.pageIndex" 
+      [pageSize]="page.pageSize" 
+      [pageSizeOptions]="page.pageSizeOptions"
+      (page)=changePage($event) 
+      *ngIf="showPaginator">
+    </mat-paginator>
+  </div>
+
+  <ng-template #cellNormal let-value="value">
+    <div class="table-row-value"> {{value}} </div>
+  </ng-template>
+
+  <ng-template #cellEdit let-value="value" let-row="row">
+    <div (click)="edit(value, row)" class="table-row-value table-row-value-edit"> {{value}} </div>
+  </ng-template>
+
+  <ng-template #cellDeleteButton let-value="value" let-row="row">
+    <span (click)="delete(value, row)" style="cursor:pointer">
+      <i class="material-icons">delete</i>
+    </span>
+  </ng-template>
+
+  <ng-template #cellCheckbox let-value="value" let-row="row">
+    <mat-checkbox [checked]="value" disabled="true">
+    </mat-checkbox>
+  </ng-template>
+
+  <ng-template #cellTplDate let-row="row" let-value="value">
+    <div (click)="edit(value, row)" class="table-row-value table-row-value-edit" style="cursor:pointer">{{value | date:'dd/MM/yyyy HH:mm'}}</div>
+  </ng-template>

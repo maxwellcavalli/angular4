@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ClockPickerComponent } from './clock-picker.component';
-import { ClockPickerDirective } from '../../directives/clock-picker.directive';
-import { FormsModule } from '@angular/forms';
+import { MxClockPickerComponent } from './clock-picker.component';
+import { MxClockPickerDirective } from '../../directives/clock-picker.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule, ReactiveFormsModule,
   ],
-  declarations: [ClockPickerComponent, ClockPickerDirective],
-  exports: [ClockPickerComponent, ClockPickerDirective]
+  declarations: [MxClockPickerComponent, MxClockPickerDirective],
+  exports: [MxClockPickerComponent, MxClockPickerDirective]
 })
-export class ClockPickerModule {
+export class MxClockPickerModule {
 
   public value: Date;
 

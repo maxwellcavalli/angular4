@@ -1,0 +1,8 @@
+    <input matInput 
+        type="text"
+        [placeholder]="placeholder"  
+        [(ngModel)]="value"        
+        (blur)="maskTelefone($event)"
+        (focus)="removeMask($event)"
+        [formControl]="formControl"
+        >
