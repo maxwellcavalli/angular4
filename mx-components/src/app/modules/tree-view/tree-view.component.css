@@ -1,0 +1,41 @@
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li.hasChildren li {
+    margin-left: 30px;
+}
+ 
+ul li ul li ul {
+    margin-left: -14px;
+}
+
+.hasChildren {
+    cursor: pointer; 
+}
+
+ul li ul li .icon {
+    margin-left: -16px;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
+.node-name {
+    background: transparent;
+}
+
+
+.node-name:hover {
+    background: rgba(0, 0, 0, .03)
+}
+
+.no-icon{
+    margin-left: 16px;
+}

@@ -1,7 +1,7 @@
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DOCUMENT } from '@angular/platform-browser';
-import { Directive, TemplateRef, ViewContainerRef, Component, Input, ContentChild, ChangeDetectorRef } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef, Component, Input, ContentChild, ChangeDetectorRef, ViewChild } from '@angular/core';
 
 @Directive({
   selector: '[mx-dialog-content]'
@@ -43,6 +43,8 @@ export class MxDialogActionComponent {
 })
 export class MxDialogComponent {
 
+  @ContentChild('titleTpl') titleTpl: TemplateRef<any>;
+  
   @Input() title: string;
   @Input() width: number = 400;
   @Input() height: number = 350;
@@ -55,6 +57,9 @@ export class MxDialogComponent {
   constructor(public dialog: MatDialog) { }
 
   ngAfterViewInit() {
+
+    console.log(this.titleTpl);
+    
 
   }
 
@@ -78,9 +83,10 @@ export class MxDialogComponent {
     }
 
     this.dialogRef.componentInstance.title = this.title;
+    this.dialogRef.componentInstance.titleTpl = this.titleTpl;
 
     this.dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      
     });
   }
 }
@@ -92,6 +98,7 @@ export class MxDialogComponent {
 })
 export class MxDialogContentHtmlCompoment {
 
+  @ViewChild('titleTpl') titleTpl: TemplateRef<any>;
   public title: string = 'Dialog';
   public templateContent: TemplateRef<any>;
   public templateAction: TemplateRef<any>;
@@ -99,4 +106,10 @@ export class MxDialogContentHtmlCompoment {
   ngAfterViewInit() {
 
   }
+
+  get hasTitleTmpl(){
+    let _b = this.titleTpl !== null && this.titleTpl !== undefined; 
+    return _b;
+  }
+
 }

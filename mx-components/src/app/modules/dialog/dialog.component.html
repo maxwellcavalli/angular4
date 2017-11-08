@@ -1,4 +1,12 @@
-<h2 mat-dialog-title>{{title}}</h2>
+<h2 mat-dialog-title>
+  <ng-container *ngIf="hasTitleTmpl"> 
+    <ng-container *ngTemplateOutlet="titleTpl"></ng-container>
+  </ng-container> 
+  
+  <ng-container *ngIf="!hasTitleTmpl"> 
+    {{title}}
+  </ng-container> 
+</h2>
 
 <mat-dialog-content style="height: calc(100% - 105px)">
   <ng-template *ngIf="templateContent" [ngTemplateOutlet]="templateContent">

@@ -1,5 +1,5 @@
 import { Directive, OnInit, Self, Renderer, ElementRef, Renderer2, NgZone, Optional, ChangeDetectorRef, ApplicationRef, HostListener } from '@angular/core';
-import { DefaultValueAccessor, NgControl, NgModel } from '@angular/forms';
+import { DefaultValueAccessor, NgControl, NgModel, FormControlDirective } from '@angular/forms';
 
 declare var jquery: any;
 declare var $: any;
@@ -17,31 +17,36 @@ export class MxClockPickerDirective {
     private control: NgControl,
     private _cdr: ApplicationRef) {
 
-    this.el = _elementRef;
+    this.el = _elementRef;    
     this.el.nativeElement.onblur = function () {
 
       let _v = this.value;
       _v = (_v as String).replace(new RegExp('\\/', 'g'), '');
 
       if (_v === '') {
-        control.control.setValue('');
+        control.control.setValue(undefined);
+        this.control.control.markAsDirty({ onlySelf: true });
+        this._cdr.tick();
       }
     };
   }
 
-  public ngAfterViewInit(): void {
-    this.el.nativeElement.value = this.control.value;
+  public ngAfterViewInit(): void {    
 
     this.zone.runOutsideAngular(() => {
+      this.el.nativeElement.value = this.control.value;
       $(this.el.nativeElement).clockpicker({
         placement: 'bottom',
         align: 'left',
         donetext: 'Done',
         afterDone: () => {
-          this.control.control.setValue(this.el.nativeElement.value);
+          (this.control as FormControlDirective).control.setValue(this.el.nativeElement.value);
+          (this.control as FormControlDirective).control.markAsDirty({onlySelf:true});
+          (this.control as FormControlDirective).control.parent.markAsDirty({onlySelf:true});
           this._cdr.tick();
         }
       });
     });
   }
 }
+

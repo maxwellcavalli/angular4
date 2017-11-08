@@ -1,8 +1,9 @@
-import { Component, OnInit, forwardRef, HostBinding, ElementRef, Renderer2, Input, Optional, Host, SkipSelf } from '@angular/core';
-import { NG_VALUE_ACCESSOR, FormControl, ControlContainer } from '@angular/forms';
+import { Component, OnInit, forwardRef, HostBinding, ElementRef, Renderer2, Input, Optional, Host, SkipSelf, ChangeDetectorRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR, FormControl, ControlContainer, NgControl, ControlValueAccessor } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
-import { BaseMaterialComponent } from '../base/base-material-component';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Subject } from 'rxjs';
 
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -10,16 +11,23 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
+const noop = () => { }
+
 @Component({
   selector: 'mx-input-cnpj-cpf',
   templateUrl: './input-cnpj-cpf.component.html',
   styleUrls: ['./input-cnpj-cpf.component.css'],
   providers: [
-    CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR,
-    { provide: MatFormFieldControl, useExisting: MxInputCnpjCpfComponent }
+    { provide: MatFormFieldControl, useExisting: MxInputCnpjCpfComponent },
+    CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR
   ]
 })
-export class MxInputCnpjCpfComponent extends BaseMaterialComponent {
+export class MxInputCnpjCpfComponent implements MatFormFieldControl<any>, ControlValueAccessor {
+
+  private onTouchedCallback: () => void = noop;
+  protected onChangeCallback: (_: any) => void = noop;
+
+
   @HostBinding() id = `cnpj-cpf-input-${MxInputCnpjCpfComponent.nextId++}`;
   controlType?: string = 'cnpj-cpf-input';
 
@@ -27,7 +35,7 @@ export class MxInputCnpjCpfComponent extends BaseMaterialComponent {
     if (obj) {
       return this.apply(obj);
     } else {
-      return obj
+      return obj;
     }
   }
 
@@ -76,5 +84,136 @@ export class MxInputCnpjCpfComponent extends BaseMaterialComponent {
 
     event.target.value = value;
   }
+
+
+  @Input() formControl: any;
+  @Input() formControlName: string;
+
+  constructor(
+    @Optional() public elRef: ElementRef,
+    @Optional() public fm: FocusMonitor,
+    @Optional() public renderer: Renderer2,
+    @Optional() @Host() @SkipSelf() public controlContainer: ControlContainer) {
+
+    fm.monitor(elRef.nativeElement, renderer, true).subscribe(origin => {
+      this.focused = !!origin;
+      this.stateChanges.next();
+    });
+  }
+
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this.fm.stopMonitoring(this.elRef.nativeElement);
+  }
+
+  ngOnInit() {
+    if (this.formControl === undefined) {
+      if (this.formControlName != undefined) {
+        this.formControl = this.controlContainer.control.get(this.formControlName);
+      }
+    }
+  }
+
+  writeValue(obj: any): void {
+
+    if (obj == null) {
+      obj = undefined;
+    }
+
+    this.value = this.beforeWriteValue(obj);
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChangeCallback = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouchedCallback = fn;
+  }
+
+  stateChanges = new Subject<void>();
+  ngControl: NgControl;
+  focused: boolean;
+  errorState: boolean = false;
+
+
+  private _placeholder: string;
+  protected _value: any = undefined;
+  private _required = false;
+  private _disabled = false;
+
+  static nextId = 0;
+
+  @HostBinding('attr.aria-describedby') describedBy = '';
+
+  @HostBinding('class.floating')
+  get shouldPlaceholderFloat() {
+    return this.focused || !this.empty;
+  }
+
+  setDescribedByIds(ids: string[]) {
+    this.describedBy = ids.join(' ');
+  }
+
+  onContainerClick(event: MouseEvent) {
+    if ((event.target as Element).tagName.toLowerCase() != 'input') {
+      event.srcElement.querySelector('input').focus();
+    }
+  }
+
+  get empty() {
+    return this._value === undefined || this._value === '';
+  }
+
+  @Input()
+  get required() {
+    return this._required;
+  }
+  set required(req) {
+    this._required = coerceBooleanProperty(req);
+    this.stateChanges.next();
+  }
+
+  @Input()
+  get placeholder() {
+    return this._placeholder;
+  }
+
+  set placeholder(plh) {
+    this._placeholder = plh;
+    this.stateChanges.next();
+  }
+
+  @Input()
+  get disabled() {
+    return this._disabled;
+  }
+  set disabled(dis) {
+    this._disabled = coerceBooleanProperty(dis);
+    this.stateChanges.next();
+  }
+
+  set value(valor: any | null) {
+    this._value = valor;
+    this.stateChanges.next();
+    this.onChangeCallback(valor);
+  }
+
+  get value() {
+    return this._value;
+  }
+
+  public clear() {
+    this.writeValue('');
+  }
+
+  public changeValue(event) {
+    this.writeValue(event);
+  }
+
+
+
+
+
 
 }

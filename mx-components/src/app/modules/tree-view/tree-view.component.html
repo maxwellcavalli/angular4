@@ -1,0 +1,20 @@
+<ul>
+	<li *ngFor="let node of nodes" class="{{hasChildren(node) ? 'hasChildren' : ''}}">
+		<span (click)="toggle(node)" class="icon" *ngIf="hasChildren(node)">
+			<i class="material-icons" *ngIf="!node.expanded " style="font-size: 12px">add</i>
+			<i class="material-icons" *ngIf="node.expanded" style="font-size: 12px">remove</i>
+		</span>
+
+		<span class="no-icon" *ngIf="!hasChildren(node) && !pai">
+
+		</span>
+		<span>
+			<input type="checkbox" [checked]="node.checked" (click)="check(node, $event)" 
+				[mxCheckbox]="getContext(node)" [indeterminate]="node.indeterminate"/>
+		</span>		
+		<span (click)="toggle(node)" class="node-name">{{ node.name }}</span>
+		<div class="{{node.expanded ? 'show' : 'hide'}}"> 
+			<mx-tree-view [nodes]="node.children" [pai]="node" ></mx-tree-view>
+		</div>
+	</li>
+</ul>

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MxDialogComponent } from './modules/dialog/dialog.component';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MxCustomPage } from 'mx-core';
+import { MxTreeViewComponent } from './modules/tree-view/tree-view.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ export class AppComponent {
 
   @ViewChild('dialog') dialog: MxDialogComponent;
   @ViewChild('cellCheckboxButton') cellCheckboxButton: TemplateRef<any>;
+  @ViewChild('tree') tree: MxTreeViewComponent;
 
   title = 'app';
 
@@ -114,8 +116,8 @@ export class AppComponent {
     code: 0,
     name: 'Name',
     surename: 'Surename',
-    hora: '01:00',
-    data: new Date(),
+    hora: '',
+    data: '2017-12-31',
     cpf: '',
     telefone: ''
   }
@@ -124,9 +126,9 @@ export class AppComponent {
     {
       id: 1, name: 'Node 1', object: null, checked: false, indeterminate: false,
       children: [
-        { id: 2, name: 'Node 1.1', object: null, checked: false, indeterminate: false },
-        { id: 3, name: 'Node 1.2', object: null, checked: false, indeterminate: false },
-        { id: 4, name: 'Node 1.3', object: null, checked: false, indeterminate: false },
+        { id: 2, name: 'Node 1.1', object: null, checked: true, indeterminate: false },
+        { id: 3, name: 'Node 1.2', object: null, checked: true, indeterminate: false },
+        { id: 4, name: 'Node 1.3', object: null, checked: true, indeterminate: false },
         { id: 5, name: 'Node 1.4', object: null, checked: true, indeterminate: false },
       ]
     },
@@ -139,14 +141,25 @@ export class AppComponent {
         {
           id: 10, name: 'Node 2.4', object: null, checked: false, indeterminate: false,
           children: [
-            { id: 11, name: 'Node 2.4.1', object: null, checked: true, indeterminate: false },
+            {
+              id: 11, name: 'Node 2.4.1', object: null, checked: false, indeterminate: false,
+              children: [
+                {
+                  id: 12, name: 'Node 2.4.1.1', object: null, checked: false, indeterminate: false,
+                  children: [
+                    { id: 13, name: 'Node 2.4.1.1.1', object: null, checked: true, indeterminate: false },
+                    { id: 14, name: 'Node 2.4.1.1.2', object: null, checked: false, indeterminate: false }
+
+                  ]
+                }
+              ]
+            }
           ]
-        },
+        }
       ]
-    }
+    },
+    { id: 15, name: 'Node 3', object: null, checked: false, indeterminate: false }
   ]
-
-
 
   _rows: Array<any> = [
     { selected: false, code: 1, name: 'Maxwell', surename: 'Cavalli' },
@@ -175,15 +188,15 @@ export class AppComponent {
     private cdf: ChangeDetectorRef) {
 
     this.form = formBuilder.group({
-      code: [{ value: null, disabled: this.disabled }, Validators.required],
-      name: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
-      surename: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
-      hora: [{ value: '00:01', disabled: this.disabled }, []],
-      data: [{ value: null, disabled: this.disabled }, []],
-      cpf: [{ value: null, disabled: this.disabled }, []],
-      telefone: [{ value: null, disabled: this.disabled }, Validators.required],
+      // code: [{ value: null, disabled: this.disabled }, Validators.required],
+      // name: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
+      // surename: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
+      hora: [{ value: null, disabled: this.disabled }, []],
+      //data: [{ value: null, disabled: this.disabled }, []],
+      // cpf: [{ value: null, disabled: this.disabled }, []],
+      // telefone: [{ value: null, disabled: this.disabled }, Validators.required],
     });
-    
+
     let index = 0;
     this._rows.forEach(el => {
       el.$$index = index++;
@@ -192,10 +205,15 @@ export class AppComponent {
     let _tmp = this._rows.slice(0, 5);
     this.rows.next(_tmp);
 
-    this.page.recordCount = this._rows.length;
+    this.page.recordCount = this._rows.length; 
     this.page.pageSize = 5;
     this.page.pageIndex = 0;
   }
+
+  public getTreeViewSelected() {
+    let _ret = this.tree.getAllSelected(false);
+  }
+
 
   public onPage(event: MxCustomPage) {
 
@@ -216,6 +234,11 @@ export class AppComponent {
       { prop: 'name', title: 'Name' },
       { prop: 'surename', title: 'Surename' }
     ];
+
+    this.myObject.data = '2017-12-01T00:00';
+    this.myObject.hora = '09:55';
+
+    this.form.controls['hora'].markAsPristine({ onlySelf: true });
   }
 
   getData(row) {
@@ -247,14 +270,10 @@ export class AppComponent {
   }
 
   public submit() {
-    console.log('submit');
-
     alert('submit');
   }
 
   public back() {
-    console.log('back');
-
     alert('Back');
   }
 
@@ -265,8 +284,6 @@ export class AppComponent {
   }
 
   public onFinishUpload(event) {
-    console.log(event);
-
   }
 
   public onFinishUploadGallery(event) {
@@ -277,7 +294,7 @@ export class AppComponent {
     this.images = undefined;
   }
 
-  public addRow(){
+  public addRow() {
     let data = this.rows.value;
     data.push({ selected: false, code: 999, name: 'TESTE', surename: 'TESTE' })
 
