@@ -117,7 +117,8 @@ export class AppComponent {
     name: 'Name',
     surename: 'Surename',
     hora: '',
-    data: '2017-12-31',
+    data: new Date(),
+    data2: new Date(),
     cpf: '',
     telefone: ''
   }
@@ -192,9 +193,10 @@ export class AppComponent {
       // name: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
       // surename: [{ value: null, disabled: this.disabled }, [Validators.required, Validators.minLength(5)]],
       hora: [{ value: null, disabled: this.disabled }, []],
-      //data: [{ value: null, disabled: this.disabled }, []],
-      // cpf: [{ value: null, disabled: this.disabled }, []],
-      // telefone: [{ value: null, disabled: this.disabled }, Validators.required],
+      data: [{ value: null, disabled: this.disabled }, []],
+      data2: [{ value: null, disabled: this.disabled }, []],
+      cpf: [{ value: null, disabled: this.disabled }, []],
+      telefone: [{ value: null, disabled: this.disabled }, Validators.required],
     });
 
     let index = 0;
@@ -235,10 +237,10 @@ export class AppComponent {
       { prop: 'surename', title: 'Surename' }
     ];
 
-    this.myObject.data = '2017-12-01T00:00';
-    this.myObject.hora = '09:55';
+    //this.myObject.data = '2017-12-01T00:00';
+    //this.myObject.hora = '09:55';
 
-    this.form.controls['hora'].markAsPristine({ onlySelf: true });
+    //this.form.controls['hora'].markAsPristine({ onlySelf: true });
   }
 
   getData(row) {

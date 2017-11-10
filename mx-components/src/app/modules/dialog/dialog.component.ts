@@ -14,7 +14,7 @@ export class MxDialogContentComponent {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.viewContainerRef.createEmbeddedView(this.templateRef);
+      this.viewContainerRef.createEmbeddedView(this.templateRef, {}, 1);
     }, 1000);
   }
 }
@@ -57,9 +57,6 @@ export class MxDialogComponent {
   constructor(public dialog: MatDialog) { }
 
   ngAfterViewInit() {
-
-    console.log(this.titleTpl);
-    
 
   }
 

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { BaseMaterialComponent } from '../base/base-material-component';
 
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -12,7 +13,7 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-const noop = () => { }
+// const noop = () => { }
 
 @Component({
   selector: 'mx-clock-picker',
@@ -23,26 +24,24 @@ const noop = () => { }
     { provide: MatFormFieldControl, useExisting: MxClockPickerComponent }
   ]
 })
-export class MxClockPickerComponent implements MatFormFieldControl<any>, ControlValueAccessor {
+export class MxClockPickerComponent extends BaseMaterialComponent<string> {
 
   @HostBinding() id = `clockpicker-input-${MxClockPickerComponent.nextId++}`;
   controlType?: string = 'clockpicker-input';
 
-  writeValue(obj: any): void {
-        this._value = obj;
-  }
 
-  private onTouchedCallback: () => void = noop;
-  protected onChangeCallback: (_: any) => void = noop;
+  // private onTouchedCallback: () => void = noop;
+  // protected onChangeCallback: (_: any) => void = noop;
 
-  @Input() formControl: any;
-  @Input() formControlName: string;
+  // @Input() formControl: any;
+  // @Input() formControlName: string;
 
   constructor(
     @Optional() public elRef: ElementRef,
     @Optional() public fm: FocusMonitor,
     @Optional() public renderer: Renderer2,
     @Optional() public controlContainer: ControlContainer) {
+    super();
 
     fm.monitor(elRef.nativeElement, renderer, true).subscribe(origin => {
       this.focused = !!origin;
@@ -62,87 +61,95 @@ export class MxClockPickerComponent implements MatFormFieldControl<any>, Control
     }
   }
 
-  registerOnChange(fn: any): void {
-    this.onChangeCallback = fn;
-  }
+  //   writeValue(obj: any): void {
+  //     this._value = obj;
+  // }
 
-  registerOnTouched(fn: any): void {
-    this.onTouchedCallback = fn;
-  }
 
-  stateChanges = new Subject<void>();
-  ngControl: NgControl;
-  focused: boolean;
-  errorState: boolean = false;
+  // registerOnChange(fn: any): void {
+  //   this.onChangeCallback = fn;
+  // }
 
-  private _placeholder: string;
-  protected _value: any;
-  private _required = false;
-  private _disabled = false;
+  // registerOnTouched(fn: any): void {
+  //   this.onTouchedCallback = fn;
+  // }
 
-  static nextId = 0;
+  // stateChanges = new Subject<void>();
+  // ngControl: NgControl;
+  // focused: boolean;
+  // errorState: boolean = false;
 
-  @HostBinding('attr.aria-describedby') describedBy = '';
+  // private _placeholder: string;
+  // protected _value: any;
+  // private _required = false;
+  // private _disabled = false;
 
-  @HostBinding('class.floating')
-  get shouldPlaceholderFloat() {
-    return this.focused || !this.empty;
-  }
+  // static nextId = 0;
 
-  setDescribedByIds(ids: string[]) {
-    this.describedBy = ids.join(' ');
-  }
+  // @HostBinding('attr.aria-describedby') describedBy = '';
 
-  onContainerClick(event: MouseEvent) {
-    if ((event.target as Element).tagName.toLowerCase() != 'input') {
-      event.srcElement.querySelector('input').focus();
-    }
-  }
+  // @HostBinding('class.floating')
+  // get shouldPlaceholderFloat() {
+  //   return this.focused || !this.empty;
+  // }
 
-  get empty() {
-    return this._value === undefined || this._value === '';
-  }
+  // setDescribedByIds(ids: string[]) {
+  //   this.describedBy = ids.join(' ');
+  // }
 
-  @Input()
-  get required() {
-    return this._required;
-  }
-  set required(req) {
-    this._required = coerceBooleanProperty(req);
-    this.stateChanges.next();
-  }
+  // onContainerClick(event: MouseEvent) {
+  //   if ((event.target as Element).tagName.toLowerCase() != 'input') {
+  //     event.srcElement.querySelector('input').focus();
+  //   }
+  // }
 
-  @Input()
-  get placeholder() {
-    return this._placeholder;
-  }
+  // get empty() {
+  //   return this._value === undefined || this._value === '';
+  // }
 
-  set placeholder(plh) {
-    this._placeholder = plh;
-    this.stateChanges.next();
-  }
+  // @Input()
+  // get required() {
+  //   return this._required;
+  // }
+  // set required(req) {
+  //   this._required = coerceBooleanProperty(req);
+  //   this.stateChanges.next();
+  // }
 
-  @Input()
-  get disabled() {
-    return this._disabled;
-  }
-  set disabled(dis) {
-    this._disabled = coerceBooleanProperty(dis);
-    this.stateChanges.next();
-  }
+  // @Input()
+  // get placeholder() {
+  //   return this._placeholder;
+  // }
 
-  set value(valor: any | null) {
-    this._value = valor;
-    this.stateChanges.next();
-    this.onChangeCallback(this._value);
-  }
+  // set placeholder(plh) {
+  //   this._placeholder = plh;
+  //   this.stateChanges.next();
+  // }
 
-  get value() {
-    return this._value;
-  }
+  // @Input()
+  // get disabled() {
+  //   return this._disabled;
+  // }
+  // set disabled(dis) {
+  //   this._disabled = coerceBooleanProperty(dis);
+  //   this.stateChanges.next();
+  // }
 
-  public changeValue(event) {
-    this.writeValue(event);
-  }
+  // set value(valor: any | null) {
+  //   if (valor !== this._value){
+  //     this._value = valor;
+  //     //this.stateChanges.next();
+  //     this.onChangeCallback(this._value);
+  //   }
+  // }
+
+  // get value() {
+  //   return this._value;
+  // }
+
+  // public changeValue(event) {
+  //   //this.writeValue(event);
+  //   this.value = event;
+  // }
 
 }

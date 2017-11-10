@@ -1,11 +1,5 @@
-<ng-progress
-    [positionUsing]="'marginLeft'"
-    [direction]="'leftToRightIncreased'"
-    [color]="'#4286f4'"
-    [trickleSpeed]="100" 
-    [thick]="true" 
-    [ease]="'easeInSine'"
-></ng-progress>
+<ng-progress [positionUsing]="'marginLeft'" [direction]="'leftToRightIncreased'" [color]="'#4286f4'" [trickleSpeed]="100"
+  [thick]="true" [ease]="'easeInSine'"></ng-progress>
 
 
 <button type="button" (click)="load()"> Load</button>
@@ -16,5 +10,22 @@
 </div>
 
 <div>
-    {{data?.body}}
+  {{data?.body}}
+</div>
+
+
+
+<mx-dialog #dialog title="TESTE DIALOG" [width]="600" [height]="400">
+  <div *mx-dialog-content>
+      <div style="text-align: justify">
+          "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+      </div>
   </div>
+
+  <div *mx-dialog-action>
+      <button mat-raised-button (click)="dialog.closeDialog()">Close</button>
+  </div>
+
+</mx-dialog>
+
+<button type="button" mat-raised-button (click)="openDialog()">OPEN</button>

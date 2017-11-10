@@ -6,6 +6,12 @@ import { AppComponent } from './app.component';
 import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
 import { BrowserXhr, HttpModule } from '@angular/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatButtonModule } from '@angular/material'
+
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -13,11 +19,12 @@ import { BrowserXhr, HttpModule } from '@angular/http';
   imports: [
     BrowserModule,
     NgProgressModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    {provide: BrowserXhr, useClass: NgProgressBrowserXhr}
-    
+    { provide: BrowserXhr, useClass: NgProgressBrowserXhr }
+
   ],
   bootstrap: [AppComponent]
 })

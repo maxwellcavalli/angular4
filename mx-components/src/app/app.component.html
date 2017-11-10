@@ -1,6 +1,50 @@
 <button type="button" mat-raised-button (click)="openDialog()">OPEN</button>
 
 
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <mx-dialog #dialog title="TESTE DIALOG" [width]="600" [height]="400">
+
+        <div *mx-dialog-content>
+
+            <mx-date placeholder="Date" [(ngModel)]="myObject.data" [formControl]="form.controls['data']"></mx-date>
+
+            <mat-form-field>
+                <mx-clock-picker placeholder="Time" [(ngModel)]="myObject.hora" [formControl]="form.controls['hora']"></mx-clock-picker>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mx-input-cnpj-cpf placeholder="CNPJ/CPF" [(ngModel)]="myObject.cpf" [formControl]="form.controls['cpf']">
+                </mx-input-cnpj-cpf>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mx-input-telefone placeholder="Telefone" [(ngModel)]="myObject.telefone" [formControl]="form.controls['telefone']"></mx-input-telefone>
+            </mat-form-field>
+
+        </div>
+
+        <div *mx-dialog-action>
+            <button mat-raised-button (click)="dialog.closeDialog()">Close</button>
+        </div>
+
+    </mx-dialog>
+
+
+    <div>
+        {{myObject.data | date}}
+    </div>
+    <div>
+        data-pristine: {{form.controls['data'].pristine}} hora-pristine: {{form.controls['hora'].pristine}}
+    </div>
+    <div>
+        data-dirty: {{form.controls['data'].dirty}} hora-dirty: {{form.controls['hora'].dirty}}
+
+    </div>
+</form>
+
+
+<!-- <mx-date placeholder="Date" [(ngModel)]="myObject.data2" [formControl]="form.controls['data2']"></mx-date> -->
+
 
 
 <!-- <mx-date placeholder="Date" [(ngModel)]="myObject.data" [formControl]="form.controls['data']"></mx-date> -->
@@ -147,33 +191,8 @@
 </div>
 -->
 
-<mx-dialog #dialog title="TESTE DIALOG" [width]="600" [height]="400">
-    
-    <ng-template #titleTpl>
-            YESYEYEYEYEYEYEYEYEY
-    </ng-template>
 
 
-    <div *mx-dialog-content>
-        <input matInput type="text" [(ngModel)]="myFilter.name" placeholder="Filter" [ngModelOptions]="{standalone:true}">
-
-        <div style="text-align: justify">"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
-            eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim
-            ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-            ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-            adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-            Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex
-            ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae
-            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
-        </div>
-    </div>
-
-    <div *mx-dialog-action>
-        <button mat-raised-button (click)="dialog.closeDialog()">Close</button>
-    </div>
-
-</mx-dialog>
-  
 <ng-template #cellCheckboxButton let-value="value" let-row="row">
-    <input type="checkbox" (click)="selection(row, $event, $event.target.checked)"  [checked]="getData(row)">
-</ng-template> 
+    <input type="checkbox" (click)="selection(row, $event, $event.target.checked)" [checked]="getData(row)">
+</ng-template>

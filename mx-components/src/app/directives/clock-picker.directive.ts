@@ -18,15 +18,18 @@ export class MxClockPickerDirective {
     private _cdr: ApplicationRef) {
 
     this.el = _elementRef;    
-    this.el.nativeElement.onblur = function () {
+    this.el.nativeElement.onchange = function () {
+      // console.log(control);
+      
 
       let _v = this.value;
       _v = (_v as String).replace(new RegExp('\\/', 'g'), '');
 
       if (_v === '') {
-        control.control.setValue(undefined);
-        this.control.control.markAsDirty({ onlySelf: true });
-        this._cdr.tick();
+        control.control.setValue(null);
+        
+        //this.control.control.markAsDirty({ onlySelf: true });
+        //this._cdr.tick();
       }
     };
   }
