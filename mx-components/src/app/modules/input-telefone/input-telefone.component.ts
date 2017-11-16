@@ -27,7 +27,7 @@ export class MxInputTelefoneComponent extends BaseMaterialComponent<String>{
   controlType?: string = 'telefone-input';
 
   @ViewChild('input') input: any;
-
+  private formated: boolean = false;
 
   private apply(value: String): String {
     if (value && value !== '') {
@@ -100,13 +100,18 @@ export class MxInputTelefoneComponent extends BaseMaterialComponent<String>{
     }
   }
 
+  ngAfterViewChecked() {
 
-  ngAfterViewInit() {
-    let _val: any = (this.input.nativeElement as HTMLInputElement).value;
-    if (_val !== undefined) {
-      _val = this.apply(_val);
-      (this.input.nativeElement as HTMLInputElement).value = _val;
+    if (!this.formated) {
+      let _val: any = this.value;
+
+      if (_val !== undefined) {
+        _val = this.apply(_val);
+        (this.input.nativeElement as HTMLInputElement).value = _val;
+        this.formated = true;
+      }
     }
   }
+
 
 }

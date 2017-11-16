@@ -13,8 +13,6 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-// const noop = () => { }
-
 @Component({
   selector: 'mx-clock-picker',
   templateUrl: './clock-picker.component.html',
@@ -28,13 +26,6 @@ export class MxClockPickerComponent extends BaseMaterialComponent<string> {
 
   @HostBinding() id = `clockpicker-input-${MxClockPickerComponent.nextId++}`;
   controlType?: string = 'clockpicker-input';
-
-
-  // private onTouchedCallback: () => void = noop;
-  // protected onChangeCallback: (_: any) => void = noop;
-
-  // @Input() formControl: any;
-  // @Input() formControlName: string;
 
   constructor(
     @Optional() public elRef: ElementRef,
@@ -60,96 +51,4 @@ export class MxClockPickerComponent extends BaseMaterialComponent<string> {
       this.formControl = this.controlContainer.control.get(this.formControlName);
     }
   }
-
-  //   writeValue(obj: any): void {
-  //     this._value = obj;
-  // }
-
-
-  // registerOnChange(fn: any): void {
-  //   this.onChangeCallback = fn;
-  // }
-
-  // registerOnTouched(fn: any): void {
-  //   this.onTouchedCallback = fn;
-  // }
-
-  // stateChanges = new Subject<void>();
-  // ngControl: NgControl;
-  // focused: boolean;
-  // errorState: boolean = false;
-
-  // private _placeholder: string;
-  // protected _value: any;
-  // private _required = false;
-  // private _disabled = false;
-
-  // static nextId = 0;
-
-  // @HostBinding('attr.aria-describedby') describedBy = '';
-
-  // @HostBinding('class.floating')
-  // get shouldPlaceholderFloat() {
-  //   return this.focused || !this.empty;
-  // }
-
-  // setDescribedByIds(ids: string[]) {
-  //   this.describedBy = ids.join(' ');
-  // }
-
-  // onContainerClick(event: MouseEvent) {
-  //   if ((event.target as Element).tagName.toLowerCase() != 'input') {
-  //     event.srcElement.querySelector('input').focus();
-  //   }
-  // }
-
-  // get empty() {
-  //   return this._value === undefined || this._value === '';
-  // }
-
-  // @Input()
-  // get required() {
-  //   return this._required;
-  // }
-  // set required(req) {
-  //   this._required = coerceBooleanProperty(req);
-  //   this.stateChanges.next();
-  // }
-
-  // @Input()
-  // get placeholder() {
-  //   return this._placeholder;
-  // }
-
-  // set placeholder(plh) {
-  //   this._placeholder = plh;
-  //   this.stateChanges.next();
-  // }
-
-  // @Input()
-  // get disabled() {
-  //   return this._disabled;
-  // }
-  // set disabled(dis) {
-  //   this._disabled = coerceBooleanProperty(dis);
-  //   this.stateChanges.next();
-  // }
-
-  // set value(valor: any | null) {
-  //   if (valor !== this._value){
-  //     this._value = valor;
-  //     //this.stateChanges.next();
-  //     this.onChangeCallback(this._value);
-  //   }
-  // }
-
-  // get value() {
-  //   return this._value;
-  // }
-
-  // public changeValue(event) {
-  //   //this.writeValue(event);
-  //   this.value = event;
-  // }
-
 }

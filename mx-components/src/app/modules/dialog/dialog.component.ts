@@ -1,7 +1,8 @@
-import { MatDialog, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogRef, MatDialogContent, MatDialogActions, MatDialogContainer, MatDialogConfig } from '@angular/material';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { DOCUMENT } from '@angular/platform-browser';
-import { Directive, TemplateRef, ViewContainerRef, Component, Input, ContentChild, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Directive, TemplateRef, ViewContainerRef, Component, Input, ContentChild, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { OverlayRef } from '@angular/cdk/overlay';
 
 @Directive({
   selector: '[mx-dialog-content]'
@@ -12,11 +13,11 @@ export class MxDialogContentComponent {
     private viewContainerRef: ViewContainerRef,
     private cdRef: ChangeDetectorRef) { }
 
-  ngAfterViewInit() {
-    setTimeout(() => {
-      this.viewContainerRef.createEmbeddedView(this.templateRef, {}, 1);
-    }, 1000);
-  }
+    ngAfterViewInit() {
+      setTimeout(() => {
+        this.viewContainerRef.createEmbeddedView(this.templateRef, {}, 1);
+      }, 1000);
+    }
 }
 
 @Directive({
@@ -44,10 +45,15 @@ export class MxDialogActionComponent {
 export class MxDialogComponent {
 
   @ContentChild('titleTpl') titleTpl: TemplateRef<any>;
-  
+
+  @ViewChild(MatDialogContainer) container: MatDialogContainer;
+  @ViewChild(MatDialogConfig) config: MatDialogConfig;
+
   @Input() title: string;
   @Input() width: number = 400;
   @Input() height: number = 350;
+
+  @Input() styleClassContent: string;
 
   @ContentChild(MxDialogContentComponent) content: MxDialogContentComponent;
   @ContentChild(MxDialogActionComponent) action: MxDialogActionComponent;
@@ -57,7 +63,6 @@ export class MxDialogComponent {
   constructor(public dialog: MatDialog) { }
 
   ngAfterViewInit() {
-
   }
 
   closeDialog() {
@@ -81,9 +86,10 @@ export class MxDialogComponent {
 
     this.dialogRef.componentInstance.title = this.title;
     this.dialogRef.componentInstance.titleTpl = this.titleTpl;
+    this.dialogRef.componentInstance.styleClassContent = this.styleClassContent;
 
     this.dialogRef.afterClosed().subscribe(result => {
-      
+
     });
   }
 }
@@ -96,17 +102,36 @@ export class MxDialogComponent {
 export class MxDialogContentHtmlCompoment {
 
   @ViewChild('titleTpl') titleTpl: TemplateRef<any>;
+
+  public styleClassContent: string;
+
+  @ViewChild(MatDialogContent) content: MatDialogContent;
+  @ViewChild(MatDialogActions) actions: MatDialogActions;
+
+  @ViewChild(MatDialogConfig) config: MatDialogConfig;
+  @ViewChild(MatDialogContainer) container: MatDialogContainer;
+
   public title: string = 'Dialog';
   public templateContent: TemplateRef<any>;
   public templateAction: TemplateRef<any>;
 
-  ngAfterViewInit() {
-
+  constructor(_containerInstance: MatDialogContainer, private _elementRef: ElementRef) {
   }
 
-  get hasTitleTmpl(){
-    let _b = this.titleTpl !== null && this.titleTpl !== undefined; 
+  ngAfterViewInit() {
+    if (this.styleClassContent != undefined) {
+      let element: HTMLElement = this._elementRef.nativeElement.parentElement;
+      element.classList.add(this.styleClassContent);
+    }
+  }
+
+  get hasTitleTmpl() {
+    let _b = this.titleTpl !== null && this.titleTpl !== undefined;
     return _b;
+  }
+
+  get hiddenTitle() {
+    return !this.hasTitleTmpl && this.title == undefined;
   }
 
 }

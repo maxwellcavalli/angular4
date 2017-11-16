@@ -23,11 +23,12 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
 })
 export class MxInputCnpjCpfComponent extends BaseMaterialComponent<String> {
 
-  @ViewChild('input') input : any;
-
+  @ViewChild('input') input: any;
 
   @HostBinding() id = `cnpj-cpf-input-${MxInputCnpjCpfComponent.nextId++}`;
   controlType?: string = 'cnpj-cpf-input';
+
+  private formated: boolean = false;
 
   private apply(value: String): String {
     if (value && value !== '') {
@@ -81,7 +82,7 @@ export class MxInputCnpjCpfComponent extends BaseMaterialComponent<String> {
     @Optional() public renderer: Renderer2,
     @Optional() @Host() @SkipSelf() public controlContainer: ControlContainer) {
 
-      super();
+    super();
     fm.monitor(elRef.nativeElement, renderer, true).subscribe(origin => {
       this.focused = !!origin;
       this.stateChanges.next();
@@ -94,19 +95,24 @@ export class MxInputCnpjCpfComponent extends BaseMaterialComponent<String> {
   }
 
   ngOnInit() {
-    if (this.formControl === undefined) { 
+    if (this.formControl === undefined) {
       if (this.formControlName != undefined) {
         this.formControl = this.controlContainer.control.get(this.formControlName);
       }
     }
   }
 
-  ngAfterViewInit(){
-    let _val: any = (this.input.nativeElement as HTMLInputElement).value;
-    if (_val !== undefined){
-      _val = this.apply(_val);
-      (this.input.nativeElement as HTMLInputElement).value = _val;
-    } 
+  ngAfterViewChecked() {
+        
+    if (!this.formated){
+      let _val: any = this.value;
+
+      if (_val !== undefined) {
+        _val = this.apply(_val);
+        (this.input.nativeElement as HTMLInputElement).value = _val;
+        this.formated = true;
+      }
+    }
   }
 
 }

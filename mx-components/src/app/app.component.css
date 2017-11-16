@@ -18,3 +18,12 @@ input[type="text"] {
     min-width: 100%
 }
 
+.customContent {
+    padding: 0 !important;
+}
+
+.customContent mat-dialog-content {
+    padding: 0;
+    margin: 0;
+    height: 100%
+}

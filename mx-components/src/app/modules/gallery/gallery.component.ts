@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { MxGalleryImageContent } from './gallery-image-content';
 
-export const MAX_ITENS = 5;
 
 @Component({
   selector: 'mx-gallery',
@@ -9,6 +8,9 @@ export const MAX_ITENS = 5;
   styleUrls: ['./gallery.component.scss']
 })
 export class MxGalleryComponent {
+
+  @Input() maxItens: number = 5;
+
 
   private selected_index = 0;
   private ignoreButtonValidation: boolean = false;
@@ -54,7 +56,7 @@ export class MxGalleryComponent {
     if (!this.ignoreButtonValidation) {
       let _count = 0;
       this._internal_images.forEach(item => {
-        item.display_on_gallery = _count < MAX_ITENS;
+        item.display_on_gallery = _count < this.maxItens;
 
         if (this.galleryImageContent === undefined) {
           this.galleryImageContent = item;
@@ -63,7 +65,7 @@ export class MxGalleryComponent {
         _count++;
       });
 
-      this.showNext = _count > MAX_ITENS;
+      this.showNext = _count > this.maxItens;
     }
   }
 
@@ -73,10 +75,10 @@ export class MxGalleryComponent {
       this.ignoreButtonValidation = true;
 
       this._internal_images[this.selected_index].display_on_gallery = false;
-      this._internal_images[MAX_ITENS + this.selected_index].display_on_gallery = true;
+      this._internal_images[this.maxItens + this.selected_index].display_on_gallery = true;
       this.showPrior = true;
 
-      if (((this.selected_index + 1) + MAX_ITENS) < this._internal_images.length) {
+      if (((this.selected_index + 1) + this.maxItens) < this._internal_images.length) {
         this.selected_index++;
       } else {
         this.showNext = false;
@@ -87,7 +89,7 @@ export class MxGalleryComponent {
   public priorImage() {
     if (this.showPrior) {
       
-      this._internal_images[MAX_ITENS + this.selected_index].display_on_gallery = false;
+      this._internal_images[this.maxItens + this.selected_index].display_on_gallery = false;
       this._internal_images[this.selected_index].display_on_gallery = true;
 
       this.showNext = true;

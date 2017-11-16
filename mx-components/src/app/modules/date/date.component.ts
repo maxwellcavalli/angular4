@@ -6,17 +6,13 @@ import { Subject } from 'rxjs/Subject';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 
-import moment from 'moment/src/moment';
 import { BaseMaterialComponent } from '../base/base-material-component';
-//import * as moment from 'moment';
 
 const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => MxDateComponent),
   multi: true
 };
-
-const noop = () => { }
 
 @Component({
   selector: 'mx-date',

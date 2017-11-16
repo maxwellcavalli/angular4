@@ -12,7 +12,7 @@
       <span style="padding-left: 5px">{{searchLabel}}</span>
     </button>
 
-    <button mat-raised-button type="button" class="add-button" (click)="add($event)">
+    <button mat-raised-button type="button" class="add-button" (click)="add($event)" *ngIf="showAddButton">
       <mat-icon>add</mat-icon>
       <span style="padding-left: 5px">{{addLabel}}</span>
     </button>

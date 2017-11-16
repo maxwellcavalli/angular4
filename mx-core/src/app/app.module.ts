@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
@@ -12,14 +12,21 @@ import { PortalModule } from '@angular/cdk/portal';
 
 
 import { RouterModule } from '@angular/router';
+import { MxNumberOnlyDirective } from './directives/only-number';
+import { MxMaskDirective } from './directives/mask';
+import { MxAutofocusDirective } from './directives/auto-focus';
 
 @NgModule({
   declarations: [
     AppComponent,
+    MxAutofocusDirective,
+    MxMaskDirective,
+    MxNumberOnlyDirective
+
+
   ],
   imports: [
     BrowserModule,
-    FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([{ path: "", component: AppComponent }]),
