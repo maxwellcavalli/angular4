@@ -1,4 +1,51 @@
-<button type="button" mat-raised-button (click)="openDialog()">OPEN</button>
+<button (click)="rating = 0">Rating 0 </button>
+<button (click)="rating = 10">Rating 10 </button>
+<button (click)="rating = 20">Rating 20 </button>
+<button (click)="rating = 30">Rating 30 </button>
+<button (click)="rating = 40">Rating 40 </button>
+
+<button (click)="rating = 50">Rating 50 </button>
+<button (click)="rating = 60">Rating 60 </button>
+<button (click)="rating = 70">Rating 70 </button>
+<button (click)="rating = 80">Rating 80 </button>
+<button (click)="rating = 90">Rating 90 </button>
+
+<button (click)="rating = 100">Rating 100 </button>
+
+<div [formGroup]="form">
+
+    <mx-rating [(ngModel)]="rating" [formControl]="form.controls['rating']">
+    </mx-rating>
+
+    <button (click)="disable()">Disable</button>
+</div>
+
+
+
+
+
+<mx-rating [ngModel]="percentualAvaliacoes" [ngModelOptions]="{standalone: true}" [disabled]="true">
+</mx-rating>
+
+<div>
+    rating : {{rating}}
+</div>
+<div>
+    totalAvaliacoesPositivas: {{totalAvaliacoesPositivas}}
+</div>
+<div>
+    totalAvaliacoes: {{totalAvaliacoes}}
+</div>
+<div>
+    percentualAvaliacoes: {{percentualAvaliacoes}}
+
+</div>
+
+
+
+
+
+<!-- <button type="button" mat-raised-button (click)="openDialog()">OPEN</button>
 
 
 <form [formGroup]="form" (ngSubmit)="submit()">
@@ -40,7 +87,7 @@
         data-dirty: {{form.controls['data'].dirty}} hora-dirty: {{form.controls['hora'].dirty}}
 
     </div>
-</form>
+</form> -->
 
 
 <!-- <mx-date placeholder="Date" [(ngModel)]="myObject.data2" [formControl]="form.controls['data2']"></mx-date> -->

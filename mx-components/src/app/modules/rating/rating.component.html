@@ -1,0 +1,31 @@
+<div class="rating-container ">
+  <div class="{{classCursor}}">
+      <i class="material-icons rating-color rating-font-size" *ngIf="value < 10" (click)="alterRating(20)">star_border</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value >= 20" (click)="alterRating(0)">star</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value > 0 && value < 20" >star_half</i>
+  </div>
+
+  <div class="{{classCursor}}">
+      <i class="material-icons rating-color rating-font-size" *ngIf="value < 21" (click)="alterRating(40)">star_border</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value >= 40" (click)="alterRating(20)">star</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value > 21 && value < 40">star_half</i>
+  </div>
+
+  <div class="{{classCursor}}">
+      <i class="material-icons rating-color rating-font-size" *ngIf="value < 41" (click)="alterRating(60)"> star_border</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value >= 60" (click)="alterRating(40)">star</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value > 41 && value < 60">star_half</i>
+  </div>
+
+  <div class="{{classCursor}}">
+      <i class="material-icons rating-color rating-font-size" *ngIf="value < 61" (click)="alterRating(80)">star_border</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value >= 80" (click)="alterRating(60)">star</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value > 61 && value < 80">star_half</i>
+  </div>
+
+  <div class="{{classCursor}}">
+      <i class="material-icons rating-color rating-font-size" *ngIf="value < 81" (click)="alterRating(100)">star_border</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value >= 100" (click)="alterRating(80)">star</i>
+      <i class="material-icons rating-color-selected rating-font-size" *ngIf="value > 81 && value < 100">star_half</i>
+  </div>
+</div> 

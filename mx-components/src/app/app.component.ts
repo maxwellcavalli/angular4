@@ -21,6 +21,8 @@ export class AppComponent {
 
   title = 'app';
 
+  rating = 0;
+
   form: FormGroup;
 
   menu: any = [
@@ -183,6 +185,11 @@ export class AppComponent {
   images: any;
   page: MxCustomPage = new MxCustomPage();
 
+
+  totalAvaliacoes = 560;
+  totalAvaliacoesPositivas = 230;
+  percentualAvaliacoes = 0;
+
   public disabled: boolean = false;
 
   constructor(formBuilder: FormBuilder,
@@ -197,6 +204,7 @@ export class AppComponent {
       data2: [{ value: null, disabled: this.disabled }, []],
       cpf: [{ value: null, disabled: this.disabled }, []],
       telefone: [{ value: null, disabled: this.disabled }, Validators.required],
+      rating: [{ value: null, disabled: this.disabled }, []],
     });
 
     let index = 0;
@@ -210,6 +218,8 @@ export class AppComponent {
     this.page.recordCount = this._rows.length; 
     this.page.pageSize = 5;
     this.page.pageIndex = 0;
+
+    
   }
 
   public getTreeViewSelected() {
@@ -236,6 +246,8 @@ export class AppComponent {
       { prop: 'name', title: 'Name' },
       { prop: 'surename', title: 'Surename' }
     ];
+
+    this.percentualAvaliacoes = (this.totalAvaliacoesPositivas / this.totalAvaliacoes) * 100;
 
     //this.myObject.data = '2017-12-01T00:00';
     //this.myObject.hora = '09:55';

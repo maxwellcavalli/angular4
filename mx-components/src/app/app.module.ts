@@ -21,7 +21,7 @@ import {
   MxClockPickerModule, MxHeaderModule, MxAccordionModule, MxCardModule, MxCrudBoxModule,
   MxDateModule, MxDialogModule, MxInputCnpjCpfModule, MxInputTelefoneModule,
   MxUploadModule, MxGalleryModule, MxDataTableModule, MxSearchBoxModule,
-  MxTreeViewModule,
+  MxTreeViewModule, MxRatingModule
 } from '../../public_api';
 
 
@@ -45,7 +45,7 @@ import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from './modules/date/custom-da
     MxHeaderModule, MxAccordionModule, MxClockPickerModule, MxCardModule,
     MxCrudBoxModule, MxDateModule, MxDialogModule, MxInputCnpjCpfModule,
     MxInputTelefoneModule, MxUploadModule, MxGalleryModule, MxDataTableModule,
-    MxSearchBoxModule, MxTreeViewModule
+    MxSearchBoxModule, MxTreeViewModule, MxRatingModule
   ],
   providers: [
     //{ provide: MAT_DATE_FORMATS, useValue: MOMENT_DATE_FORMATS },

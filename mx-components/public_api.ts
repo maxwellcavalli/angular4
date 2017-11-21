@@ -13,6 +13,8 @@ export * from './src/app/modules/gallery/gallery.module'
 export * from './src/app/modules/data-table/data-table.module'
 export * from './src/app/modules/search-box/search-box.module'
 export * from './src/app/modules/tree-view/tree-view.module'
+
+export * from './src/app/modules/rating/rating.module'
 //export * from './src/app/modules/shared/shared.module'
 
 export * from './src/app/modules/dialog'

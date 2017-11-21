@@ -1,0 +1,20 @@
+.rating-container {
+    display: flex;
+}
+
+.rating-cursor {
+    cursor: pointer;
+}
+
+
+.rating-color-selected {
+    color: rgb(255, 238, 1);
+}
+
+.rating-color {
+    color: rgb(0, 0, 0);
+}
+
+.rating-font-size {
+    font-size: 32px;
+}

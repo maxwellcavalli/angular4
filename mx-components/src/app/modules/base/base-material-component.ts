@@ -63,29 +63,34 @@ export class BaseMaterialComponent<T> implements MatFormFieldControl<T>, Control
         return this._value === undefined || this._value === '';
     }
 
-    @Input()
+   
     get required() {
         return this._required;
     }
+
+    @Input()
     set required(req) {
         this._required = coerceBooleanProperty(req);
         this.stateChanges.next();
     }
 
-    @Input()
+    
     get placeholder() {
         return this._placeholder;
     }
 
+    @Input()
     set placeholder(plh) {
         this._placeholder = plh;
         this.stateChanges.next();
     }
 
-    @Input()
+   
     get disabled() {
         return this._disabled;
     }
+
+    @Input()
     set disabled(dis) {
         this._disabled = coerceBooleanProperty(dis);
         this.stateChanges.next();
