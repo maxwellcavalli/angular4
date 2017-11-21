@@ -8,11 +8,11 @@
 
 
 .rating-color-selected {
-    color: rgb(255, 238, 1);
+    color: #ffd740;
 }
 
 .rating-color {
-    color: rgb(0, 0, 0);
+    color: #cacaca;
 }
 
 .rating-font-size {

@@ -66,7 +66,7 @@ export class MxRatingComponent implements OnInit, ControlValueAccessor {
   writeValue(obj: any): void {
     this._value = obj;
 
-    this.cdr.detectChanges();
+    this.cdr.markForCheck();
   }
 
   registerOnChange(fn: any): void {

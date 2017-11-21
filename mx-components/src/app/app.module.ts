@@ -11,7 +11,7 @@ import {
 } from '@angular/material';
 
 import { MatButtonModule } from '@angular/material';
-import { MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material';
+import { MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE, MatRadioModule } from '@angular/material';
 import { PlatformModule } from '@angular/cdk/platform';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ObserversModule } from '@angular/cdk/observers';
@@ -38,7 +38,7 @@ import { CUSTOM_DATE_FORMATS, CustomDateAdapter } from './modules/date/custom-da
     //FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatFormFieldModule, MatInputModule, MatButtonModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule, MatRadioModule,
 
     RouterModule.forRoot([{ path: "", component: AppComponent }]),
 

@@ -22,6 +22,7 @@ export class AppComponent {
   title = 'app';
 
   rating = 0;
+  rating1 = 0;
 
   form: FormGroup;
 
@@ -190,6 +191,9 @@ export class AppComponent {
   totalAvaliacoesPositivas = 230;
   percentualAvaliacoes = 0;
 
+  selectedOption: any;
+
+
   public disabled: boolean = false;
 
   constructor(formBuilder: FormBuilder,
@@ -205,6 +209,8 @@ export class AppComponent {
       cpf: [{ value: null, disabled: this.disabled }, []],
       telefone: [{ value: null, disabled: this.disabled }, Validators.required],
       rating: [{ value: null, disabled: this.disabled }, []],
+      rating1: [{ value: null, disabled: this.disabled }, []],
+      tipo: [{ value: null, disabled: this.disabled }, []],      
     });
 
     let index = 0;
